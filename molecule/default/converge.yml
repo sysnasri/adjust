@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include adjust"
+      include_role:
+        name: "adjust"
+  post_tasks:
+    - name: Make sure everything looks good.
+      command: "cat /etc/fstab"
+      changed_when: false
+      register: fstab_vars
+    - debug:
+        var: fstab_vars

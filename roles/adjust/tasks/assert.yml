@@ -1,0 +1,30 @@
+---
+- name: test if items  in fstab dictionary is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.value.mount is defined
+      - item.value.type is defined
+      # - item.value.export is defined
+      # - item.value.options is defined
+    quiet: yes
+  with_dict: "{{ fstab }}"
+  loop_control:
+    label: "{{ item.key }}"
+  when:
+    - item.key != '192.168.4.5'
+    - item.key is defined
+
+- name: test if items  in fstab dictionary is set correctly for nfs
+  ansible.builtin.assert:
+    that:
+      - item.value.mount is defined
+      - item.value.type is defined
+      - item.value.export is defined
+      - item.value.options is defined
+    quiet: yes
+  with_dict: "{{ fstab }}"
+  loop_control:
+    label: "{{ item.key }}"
+  when:
+    - item.key == '192.168.4.5'
+    - item.key is defined

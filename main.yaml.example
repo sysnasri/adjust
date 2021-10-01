@@ -1,0 +1,11 @@
+- name: Setup fstab file
+  hosts: localhost
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: "Include Fstab Generation role"
+      include_role:
+        name: "adjust"
+      tags:
+        - fstab
+        - mount

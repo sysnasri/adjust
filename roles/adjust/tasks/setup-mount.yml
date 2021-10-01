@@ -1,0 +1,23 @@
+- name: Generate Fstab file  for local fs.
+  # debug:
+  #   var: fstab
+  ansible.posix.mount:
+    backup: yes
+    path: "{{ item.value.mount  }}"
+    src: "{{  item.key | default(None)  }}"
+    fstype: "{{ item.value.type }}"
+    opts: "{{ item.value.options | default( None) }} "
+    state: present
+  when: item.key != '192.168.4.5'
+  with_dict: "{{  fstab }}"
+
+- name: Generate Fstab file for  nfs .
+  ansible.posix.mount:
+    backup: yes
+    path: "{{ item.value.mount  }}"
+    src: "{{  item.key  }}:{{ item.value.export }}"
+    fstype: "{{ item.value.type }}"
+    opts: "{{ item.value.options | join(',') }} "
+    state: present
+  when: item.key == '192.168.4.5'
+  with_dict: "{{  fstab  }}"

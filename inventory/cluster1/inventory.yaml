@@ -1,0 +1,10 @@
+all:
+  hosts:
+    node1:
+      ansible_host: localhost
+      ip: localhost
+      access_ip: localhost
+  children:
+    linux_servers:
+      hosts:
+        node1:
