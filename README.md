@@ -3,20 +3,21 @@
 
      # Part 1: Requirements
 
-          Molecule uses docker as provisioner so please install docker ce in advanced then:
-            you can install all packages and dependenices easily via pip3 in the root directory issue the following commands:
+       Molecule uses docker as provisioner so please install docker ce in advanced then:
+       you can install all dependenices via pip3, issue the following commands:
 
-                git clone https://github.com/sysnasri/adjust
-                pip3 install -r requirements.txt         
+         git clone https://github.com/sysnasri/adjust
+         pip3 install -r requirements.txt         
 
 
           
 
      # Part 2: Converge test
 
-          - You can test the role before applying it into production servers and see the result, to issue tests run :
-            molecule converge
-            molecule destroy 
+        - You can test the role before applying  into production and see the result, run :
+
+          molecule converge
+          molecule destroy 
 
 
 
@@ -37,9 +38,4 @@
      # Part 4: Run the ansible role.
 
         ansible-playbook -i inventory/cluster1/inventory.yaml main.yaml.example
-
-
-
-
-
 
