@@ -7,7 +7,9 @@
        you can install all dependenices via pip3, issue the following commands:
 
          git clone https://github.com/sysnasri/adjust
-         pip3 install -r requirements.txt         
+         pip3 install -r requirements.txt 
+         ansible-galaxy install -r roles/adjust/requirements.yml   
+         
 
 
           
