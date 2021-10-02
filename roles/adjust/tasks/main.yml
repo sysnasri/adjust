@@ -1,4 +1,4 @@
 ---
 # tasks file for adjust
-- include_tasks: setup-mount.yml
 - include_tasks: assert.yml
+- include_tasks: setup-mount.yml
