@@ -1,0 +1,23 @@
+#author : Nasri
+#This task creates and formats partitiones on the system except sda disk 
+
+    - name : verify extra disks on the system
+      set_fact:
+        disk_list: "{{ansible_devices.keys()  | map ( 'regex_search' ,'sd.*') | reject('match','sda') | select('string') | list }}"
+    - debug:
+        msg: The following devices are going to format and partition {{item}}
+      loop : "{{disk_list}}"
+    - name : Creating Paritions on the devices
+      parted:
+         device: /dev/"{{item}}"
+         number: 1
+         state: present
+         part_start : 0%
+         part_end: 100%
+         part_type : primary
+      loop : "{{disk_list}}"
+    - name : formating partitions and using EXT4 as filesystem
+      filesystem :
+        device : "/dev/{{item}}1"
+        fstype : ext4
+      loop: "{{disk_list}}"
