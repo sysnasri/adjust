@@ -8,7 +8,7 @@
     fstype: "{{ item.value.type }}"
     opts: "{{ item.value.options | default( None) }} "
     state: present
-  when: item.key != '192.168.4.5'
+  when: item.key |  ansible.netcommon.ipaddr('address') == False
   with_dict: "{{  fstab }}"
 
 - name: Generate Fstab file for  nfs .
@@ -19,5 +19,5 @@
     fstype: "{{ item.value.type }}"
     opts: "{{ item.value.options | join(',') }} "
     state: present
-  when: item.key == '192.168.4.5'
+  when: item.key | ansible.netcommon.ipaddr('address')
   with_dict: "{{  fstab  }}"
